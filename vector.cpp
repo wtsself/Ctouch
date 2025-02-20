@@ -90,7 +90,8 @@ int main() {
 		std::cout << s2[i] << " ";//s2[10],下标访问越界可能会导致程序异常终止
 	}
 	s2.at(10);//使用at（）函数越界时抛出异常
-#endif
+
+	//插入
 	std::vector<int> s2(10,1); 
 	for (int i = 0; i < s2.size(); i++) {
 		std::cout << s2[i] << " ";
@@ -125,6 +126,42 @@ int main() {
 	s2.insert(s2.begin() + 1, r1.begin() + 1, r1.end());//40.50插进s2第一个元素后的位置，begin()函数是首地址，不是首个元素，因此s2.begin() + 1不是从第二元素位置插进去
 	std::for_each(s2.begin(), s2.end(), myprint<int>);
 	std::cout << "\n"<<s2.size();
+	//迭代器统一了对所有容器的访问方式，迭代器本质是指针（不严谨），也是类中类，vector<int>::iterator ite,ite为变量名，对象，指针
+	//迭代器失效处理--vs会程序异常终止
+	//插入后导致迭代器失效
+	std::vector<int> v1(5, 2);
+	//std::cout << v1[15] << std::endl;
+	//v1[15] = 100;//访问越界可能会修改内存值
+	//std::cout << v1[15] << std::endl;
+	std::vector<int>::iterator ite;
+	ite = v1.begin() + 4;
+	//v1.insert(v1.begin() + 4, 8);//这里插入使原来数组的空间被释放掉了，深拷贝到内存其它空间，导致ite指针变成了野指针，正常情况下ite指向的值应该为8
+	//std::cout <<*ite;
+	ite = v1.insert(v1.begin() + 4, 8);//在插入中使用迭代器，要重新用插入的返回值重新赋值--该操作更新迭代器
+	std::cout << *ite;
+
+	//删除元素后导致迭代器失效
+	std::vector<int> v1 = { 1,2,3,3,3,3,3,4,5 };
+	for (std::vector<int>::iterator ite = v1.begin(); ite != v1.end(); ) {
+		if (*ite == 3) {
+			ite=v1.erase(ite);//更新迭代器
+		}
+		else {
+			ite++;//这里吧for中的++移到这里是为了能够在删除一个元素后，该元素后的元素位置前移（vector动态特性），ite能够继续在该位置上判断
+		}
+	}
+	for (std::vector<int>::iterator ite = v1.begin(); ite != v1.end(); ite++) {
+		std::cout << *ite << std::endl;
+	}
+#endif
+	//deque（双向数组，跟vector容器有很多相似之处，都是动态数组）
+	//deque的在扩容时的数据不是完全连续的，通过[]运算符重载找到数据，而vector是连续的数据存储空间，理论上vector的效率更高
+	//deque特有的头插和头删，push_front(),pop_front()
+	//需要频繁使用头插时才用deque，不用vector
+
+
+
+
 
 	std::cout << "\nfuck you !";
 	return 0;
