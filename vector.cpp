@@ -10,6 +10,42 @@ void myprint(T n) {
 //代码要一边看一边敲，光看不敲等于不学
 int main() {
 #if 0
+//#include<iostream>
+//#include<vector>
+//#include<algorithm>
+//	template<class T>//for_each函数的通用迭代输出函数
+//	void cout1(T a) {
+//		std::cout << a << " ";
+//	}
+//	float main() {
+//		int a = 0;
+//		float array[] = { 1.21,2.21,3.21,4.32 };
+//		std::vector<float> v1(array, array + 4);
+//		std::for_each(v1.begin(), v1.end(), cout1<float>);
+//		std::cout << std::endl;
+//		std::vector<float> v2(v1);
+//		std::vector<float> v3(3, 21);
+//		std::for_each(v2.begin(), v2.end(), cout1<float>);
+//		std::cout << std::endl;
+//		std::for_each(v3.begin(), v3.end(), cout1<float>);
+//
+//		std::cout << std::endl;
+//		std::string array_str[] = { "my" ,"name","is","wutaisong" };
+//		std::vector<std::string> v4(array_str, array_str + 4);
+//		std::for_each(v4.begin(), v4.end(), cout1<std::string>);
+//		std::cout << std::endl;
+//		std::vector<std::string> v21;
+//		v21.push_back("i");
+//		v21.push_back("love");
+//		v21.push_back("you");
+//		for (std::vector<std::string>::iterator ite = v21.begin(); ite != v21.end(); ite++) {
+//			std::cout << *ite << " ";//迭代器可以看成一种指针
+//		}
+//		std::cout << std::endl;
+//		a = 2;
+//
+//		return 0;
+//	}
 	//构造
 	int arry[] = { 1,2,3,4,5 };
 	std::vector<int> v1(arry, arry + 5);
