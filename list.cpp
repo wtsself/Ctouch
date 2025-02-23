@@ -102,7 +102,7 @@ int main() {
 
 	//list容器的大小也是跟vector一样的,使用以下四个函数
 	//size(),empty(),resize(num),resize(num,elem)
-#endif
+
 	//同上，list容器的插入也一样
 	std::list<int> a = { 1,2,3 }, b = { 32,44,90,30 };
 	std::list<int>::iterator it = a.begin();
@@ -129,11 +129,74 @@ int main() {
 		std::cout << *it << " ";
 	}
 
+	//list删除+反序排列
+	std::list<int> a = { 1,2,3,4,5,6 };
+	std::list<int>::iterator it = a.begin();
+	it=a.erase(it);
+	std::cout << *it << std::endl;
+	for (std::list<int>::iterator it0 = a.begin(); it0 != a.end(); it0++) {
+		std::cout << *it0 << " ";
+	}
+	
+	//std::list<int>::reverse_iterator its = a.rbegin();
+	//its++; 
+	//std::cout <<std::endl;
+	//std::cout << *its ;
+
+	//a.erase(its,a.rbegin());错误的这段代码，erase不能接受反向迭代器
+
+	std::list<int>::iterator ita = it;
+	it++; ita++; ita++; ita++;
+	std::cout << "\n" << *it << std::endl << *ita;
+	a.erase(it, ita);//删除也是左闭右开
+	std::cout << std::endl;
+
+	for (std::list<int>::iterator it0 = a.begin(); it0 != a.end(); it0++) {
+		std::cout << *it0 << " ";
+	}
+	a.remove(6);
+	std::cout << "\nremove删除指定元素6后为：\n";
+	for (std::list<int>::iterator it0 = a.begin(); it0 != a.end(); it0++) {
+		std::cout << *it0 << " ";
+	}
+	a.push_back(90);
+	a.push_back(21);
+	a.reverse();
+	std::cout << "\n末尾加入90,21后反转序列后：\n";
+	for (std::list<int>::iterator it0 = a.begin(); it0 != a.end(); it0++) {
+		std::cout << *it0 << " ";
+	}
+
+	a.clear();
+	std::cout << "\nlist容器a是否为空=" << a.empty() << std::endl;
+#endif
+	//迭代器失效(出现于删除和插入)
+	//迭代器的原理（大概）是通过指针来指向对应的内存空间的操作
+	//野指针是指向了其它不是自己范围的内存空间，其指向的空间被释放和分配了，不再属于自己
+	std::list<int> a = { 2,3,4,3,3,7 };
+	for (std::list<int>::iterator it0 = a.begin(); it0 != a.end(); it0++) {
+		std::cout << *it0 << " ";
+	}
+	std::cout << std::endl;
 
 
+	//公式化解决迭代器删除失效方法
+	for (std::list<int>::iterator is = a. begin(); is != a.end();) {
+		if (*is == 3) {
+			is = a.erase(is);
+		}
+		else
+		{
+			is++;
+		}
+	}
 
-
-
+	for (std::list<int>::iterator it0 = a.begin(); it0 != a.end(); it0++) {
+		std::cout << *it0 << " ";
+	}
+	
+	//总之，对于迭代器it，在删除操作中，在删除后不更新时其指向位置删除后一元素，更新后指向删除元素前一位置
+	//在插入操作中，不更新时it任然指向原先指向的那个元素，更新后为指向插入的元素中第一个元素位置
 	std::cout << "\nfuck you !";
 	return 0;
 }
