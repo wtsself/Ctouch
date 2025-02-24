@@ -158,7 +158,7 @@ int main() {
 	//deque的在扩容时的数据不是完全连续的，通过[]运算符重载找到数据，而vector是连续的数据存储空间，理论上vector的效率更高
 	//deque特有的头插和头删，push_front(),pop_front()
 	//需要频繁使用头插时才用deque，不用vector
-
+	//只有vector,deque可以遍历时+n
 
 
 

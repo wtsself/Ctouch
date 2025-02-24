@@ -39,7 +39,8 @@ int main() {
 	std::stack<int> stk2=stk;//此时任然是在调用拷贝构造函数，因为这是在构造函数的过程中
 	 
 	stk2 = stk;//在构造完毕后，这时才是用的=运算符重载
-
+	//empty()和size()函数也适用
+	std::cout << "数组stk的大小和是否为空" << stk.size() << stk.empty() << std::endl;
 
 
 
