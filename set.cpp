@@ -196,5 +196,30 @@ pf(123);           // 等价于test(123)
 	//upper_bound(elem)查找第一个大于elem的元素
 	it = a.upper_bound(4);
 	cout << "should be 5:" << *it << endl;
+
+	//pair对组，可以将两个值视为一个单元，这两个值第一个为lower_bound()的值,第二个值为upper_bound()的值
+	std::pair<std::set<int>::iterator, std::set<int>::iterator> p = a.equal_range(40);
+	if (p.first != a.end() && p.second != a.end()) {//如果访问不到元素则在gcc编译器中回给两个迭代器返回end（） 的值
+		cout << *(p.first) << endl;
+		cout << *(p.second) << endl;
+	}
+	else {
+		cout << "i can't find" << endl;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	return 0;
 }
